@@ -8,7 +8,6 @@ import timber.log.Timber
 class AlamiApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
         initTimber()
     }
 
