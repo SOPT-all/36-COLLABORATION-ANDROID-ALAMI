@@ -20,18 +20,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.component.AlamiButton
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 import org.sopt.alami.core.util.noRippleClickable
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
 fun AlarmDismissRoute(
     paddingValues: PaddingValues,
-    navigateToHome: () -> Unit,
+    navigateToHome: () -> Unit
 ) {
     AlarmDismissScreen(
         paddingValues = paddingValues,
@@ -84,7 +84,7 @@ private fun AlarmDismissScreen(
 
             SnoozeButton(
                 remainingTime = "3번",
-                onClick = {},
+                onClick = {}
             )
 
             Spacer(modifier = Modifier.weight(1f))
