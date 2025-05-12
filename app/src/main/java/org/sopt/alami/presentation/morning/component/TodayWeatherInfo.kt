@@ -29,7 +29,7 @@ fun TodayWeatherInfo(
     currentDate: String,
     temperature: Int,
     modifier: Modifier = Modifier,
-    weatherType: WeatherType = WeatherType.SUNNY,
+    weatherType: WeatherType = WeatherType.SUNNY
 ) {
     val weatherIcon = remember(weatherType) {
         when (weatherType) {

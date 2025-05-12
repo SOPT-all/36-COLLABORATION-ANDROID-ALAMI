@@ -92,7 +92,7 @@ fun MorningScreen(
 private fun TodayFeeling(modifier: Modifier = Modifier) {
     MorningSurface(
         modifier = modifier,
-        paddingValues = PaddingValues(horizontal = 22.dp, vertical = 24.dp),
+        paddingValues = PaddingValues(horizontal = 22.dp, vertical = 24.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().background(Color.Unspecified),
@@ -127,7 +127,7 @@ private fun TodayFeeling(modifier: Modifier = Modifier) {
 private fun TodayFortune(modifier: Modifier = Modifier) {
     MorningSurface(
         modifier = modifier,
-        paddingValues = PaddingValues(22.dp),
+        paddingValues = PaddingValues(22.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -144,7 +144,9 @@ private fun TodayFortune(modifier: Modifier = Modifier) {
                     color = AlarmiTheme.colors.white
                 )
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_morning_arrow_right_16),
+                    imageVector = ImageVector.vectorResource(
+                        id = R.drawable.ic_morning_arrow_right_16
+                    ),
                     tint = Color.Unspecified,
                     contentDescription = null
                 )
