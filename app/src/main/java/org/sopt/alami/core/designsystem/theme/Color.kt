@@ -93,5 +93,3 @@ val defaultAlarmiColors = alarmiColors(
     white = white,
     black = black
 )
-
-val localAlarmiColorsProvider = staticCompositionLocalOf { defaultAlarmiColors }
