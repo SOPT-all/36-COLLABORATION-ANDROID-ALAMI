@@ -34,6 +34,20 @@ import org.sopt.alami.presentation.morning.component.TodayWeatherInfo
 import org.sopt.alami.presentation.morning.model.WeatherType
 
 @Composable
+fun MorningRoute(
+    paddingValues: PaddingValues
+) {
+    // TODO: 실제 데이터로 변경
+    MorningScreen(
+        paddingValues = paddingValues,
+        temperature = 20,
+        currentDate = "4월 28일 월요일",
+        weatherType = WeatherType.SUNNY,
+        imageUrl = "https://github.com/user-attachments/assets/ce024f9f-39e8-48fa-8d78-4c345bcf40da"
+    )
+}
+
+@Composable
 fun MorningScreen(
     paddingValues: PaddingValues,
     temperature: Int,
@@ -95,7 +109,9 @@ private fun TodayFeeling(modifier: Modifier = Modifier) {
         paddingValues = PaddingValues(horizontal = 22.dp, vertical = 24.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().background(Color.Unspecified),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Unspecified),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
