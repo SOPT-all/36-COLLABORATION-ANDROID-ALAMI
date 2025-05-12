@@ -7,7 +7,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import org.sopt.alami.R
 
-
 val alarmiFontBold = FontFamily(Font(R.font.noto_sans_kr_bold))
 val alarmiFontSemiBold = FontFamily(Font(R.font.noto_sans_kr_semibold))
 val alarmiFontMedium = FontFamily(Font(R.font.noto_sans_kr_medium))
@@ -15,14 +14,14 @@ val alarmiFontRegular = FontFamily(Font(R.font.noto_sans_kr_regular))
 
 @Immutable
 data class alarmiTypography(
-    //Title
+    // Title
     val title01b88: TextStyle,
     val title02b30: TextStyle,
     val title03b22: TextStyle,
     val title04b18: TextStyle,
     val title05b13: TextStyle,
 
-    //Body
+    // Body
     val body01b15: TextStyle,
     val body02b12: TextStyle,
     val body03sb12: TextStyle,
@@ -30,12 +29,12 @@ data class alarmiTypography(
     val body05r15: TextStyle,
     val body06r14: TextStyle,
 
-    //Caption
+    // Caption
     val caption01r13: TextStyle,
     val caption02r11: TextStyle,
-    val caption03r10: TextStyle,
+    val caption03r10: TextStyle
 
-    )
+)
 
 val defaultAlarmiTypography = alarmiTypography(
     title01b88 = TextStyle(
@@ -69,7 +68,7 @@ val defaultAlarmiTypography = alarmiTypography(
         letterSpacing = -4.sp
     ),
 
-//Body
+// Body
     body01b15 = TextStyle(
         fontFamily = alarmiFontBold,
         fontSize = 15.sp,
@@ -107,7 +106,7 @@ val defaultAlarmiTypography = alarmiTypography(
         letterSpacing = -12.sp
     ),
 
-//Caption
+// Caption
     caption01r13 = TextStyle(
         fontFamily = alarmiFontRegular,
         fontSize = 13.sp,

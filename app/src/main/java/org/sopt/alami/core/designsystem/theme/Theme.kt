@@ -27,7 +27,7 @@ private val LocalAlarmiTypography = staticCompositionLocalOf<alarmiTypography> {
 
 private val DarkColorScheme = darkColorScheme(
     primary = white,
-    background = black,
+    background = black
 
 )
 
@@ -62,7 +62,7 @@ fun ProvideAlarmiColorsAndTypography(
 
 @Composable
 fun AlamiTheme(
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -75,7 +75,7 @@ fun AlamiTheme(
 
     ProvideAlarmiColorsAndTypography(
         colors = defaultAlarmiColors,
-        typography = defaultAlarmiTypography,
+        typography = defaultAlarmiTypography
     ) {
         MaterialTheme(
             colorScheme = DarkColorScheme,
