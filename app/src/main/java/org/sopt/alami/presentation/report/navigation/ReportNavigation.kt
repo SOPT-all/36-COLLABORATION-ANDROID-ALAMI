@@ -23,4 +23,5 @@ fun NavGraphBuilder.reportNavGraph(
 
 }
 
-@Serializable data object Report : MainTabRoute
+@Serializable
+data object Report : MainTabRoute

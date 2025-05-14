@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 import org.sopt.alami.core.navigation.MainTabRoute
 import org.sopt.alami.presentation.sleep.SleepRoute
 
-fun NavController.navigateToSleep(navOptions: NavOptions ?= null) {
-    navigate(Sleep,navOptions)
+fun NavController.navigateToSleep(navOptions: NavOptions? = null) {
+    navigate(Sleep, navOptions)
 }
 
 fun NavGraphBuilder.sleepNavGraph(
@@ -23,4 +23,5 @@ fun NavGraphBuilder.sleepNavGraph(
 
 }
 
-@Serializable data object Sleep : MainTabRoute
+@Serializable
+data object Sleep : MainTabRoute

@@ -18,7 +18,6 @@ fun SettingRoute(
     padding: PaddingValues
 ) {
     SettingScreen(padding)
-
 }
 
 @Composable
@@ -34,7 +33,7 @@ fun SettingScreen(
         verticalArrangement = Arrangement.Center
 
 
-    )  {
+    ) {
         Text(
             text = "Setting",
             textAlign = TextAlign.Center

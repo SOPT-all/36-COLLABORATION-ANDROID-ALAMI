@@ -1,10 +1,8 @@
 package org.sopt.alami.presentation.main
 
-import androidx.compose.animation.EnterTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,7 +30,7 @@ fun MainScreen(
         bottomBar = {
             MainBottomBar(
                 modifier = Modifier
-                    .background(color = AlarmiTheme.colors.black)
+                    .background(color = AlarmiTheme.colors.grey800)
                     .navigationBarsPadding(),
                 isVisible = navigator.showBottomNavigator(),
                 tabs = MainTabType.entries.toPersistentList(),

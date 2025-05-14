@@ -23,4 +23,5 @@ fun NavGraphBuilder.settingNavGraph(
 
 }
 
-@Serializable data object Setting : MainTabRoute
+@Serializable
+data object Setting : MainTabRoute
