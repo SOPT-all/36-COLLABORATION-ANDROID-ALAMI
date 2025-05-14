@@ -124,8 +124,7 @@ private fun RowScope.MainBottomBarItem(
 
         Text(
             text = stringResource(tab.descriptionResId),
-            //style = AlarmiTheme.typography.caption03r10,
-            fontSize = 12.sp,
+            style = AlarmiTheme.typography.caption03r10,
             color = textColor,
 
 
