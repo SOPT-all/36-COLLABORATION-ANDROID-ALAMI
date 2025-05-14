@@ -16,10 +16,8 @@ fun NavController.navigateToMorning(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.morningNavGraph(
     padding: PaddingValues
 ) {
-
     composable<Morning> {
         MorningRoute(padding)
-
     }
 }
 

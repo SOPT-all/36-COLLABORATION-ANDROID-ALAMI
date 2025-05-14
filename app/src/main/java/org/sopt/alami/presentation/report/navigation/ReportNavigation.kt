@@ -16,11 +16,9 @@ fun NavController.navigateToReport(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.reportNavGraph(
     padding: PaddingValues
 ) {
-
     composable<Report> {
         ReportRoute(padding)
     }
-
 }
 
 @Serializable

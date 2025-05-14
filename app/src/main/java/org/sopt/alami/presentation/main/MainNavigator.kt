@@ -24,14 +24,12 @@ class MainNavigator(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-
     val startDestination = Alarm
 
     val currentTab: MainTabType?
         @Composable get() = MainTabType.find { mainTabItemType ->
             currentDestination?.hasRoute(mainTabItemType::class) == true
         }
-
 
     fun navigate(mainTabItemType: MainTabType) {
         val navOptions = navOptions {
@@ -57,7 +55,6 @@ class MainNavigator(
     fun navigateUp() {
         navController.navigateUp()
     }
-
 
     @Composable
     fun showBottomNavigator() = MainTabType.contains {

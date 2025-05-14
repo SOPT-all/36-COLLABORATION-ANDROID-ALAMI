@@ -9,8 +9,7 @@ import kotlinx.serialization.Serializable
 import org.sopt.alami.core.navigation.MainTabRoute
 import org.sopt.alami.presentation.alarm.AlarmRoute
 
-
-fun NavController.navigateToAlarm(navOptions: NavOptions ?= null) {
+fun NavController.navigateToAlarm(navOptions: NavOptions ? = null) {
     navigate(Alarm, navOptions)
 }
 

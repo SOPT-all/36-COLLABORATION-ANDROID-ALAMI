@@ -2,7 +2,6 @@ package org.sopt.alami.presentation.setting
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +23,6 @@ fun SettingRoute(
 fun SettingScreen(
     padding: PaddingValues
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,12 +30,10 @@ fun SettingScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
 
-
     ) {
         Text(
             text = "Setting",
             textAlign = TextAlign.Center
         )
     }
-
 }

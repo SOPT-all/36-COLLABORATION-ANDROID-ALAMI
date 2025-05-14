@@ -2,7 +2,6 @@ package org.sopt.alami.presentation.report
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,16 +16,13 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 fun ReportRoute(
     padding: PaddingValues
 ) {
-
     ReportScreen(padding)
-
 }
 
 @Composable
 fun ReportScreen(
     padding: PaddingValues
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,12 +30,10 @@ fun ReportScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
 
-
     ) {
         Text(
             text = "Report",
             textAlign = TextAlign.Center
         )
     }
-
 }

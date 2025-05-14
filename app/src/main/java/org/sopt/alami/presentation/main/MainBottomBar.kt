@@ -43,33 +43,29 @@ fun MainBottomBar(
     onTabSelected: (MainTabType) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     AnimatedVisibility(
         visible = isVisible,
         enter = fadeIn() + slideIn { IntOffset(0, 0) },
-        exit = fadeOut() + slideOut { IntOffset(0, 0) },
+        exit = fadeOut() + slideOut { IntOffset(0, 0) }
     ) {
         Surface(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
 
-
         ) {
-
             Row(
                 modifier = modifier
                     .navigationBarsPadding(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
 
-
             ) {
                 tabs.forEach { tab ->
                     MainBottomBarItem(
                         isSelected = tab == currentTab,
                         tab = tab,
-                        onClick = { onTabSelected(tab) },
+                        onClick = { onTabSelected(tab) }
 
                     )
                 }
@@ -78,14 +74,12 @@ fun MainBottomBar(
     }
 }
 
-
 @Composable
 private fun RowScope.MainBottomBarItem(
     isSelected: Boolean,
     tab: MainTabType,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
-
     val iconRes = if (isSelected) tab.selectedIcon else tab.unselectedIcon
 
     val textColor = if (isSelected) AlarmiTheme.colors.white else AlarmiTheme.colors.grey400
@@ -109,17 +103,15 @@ private fun RowScope.MainBottomBarItem(
         Text(
             text = stringResource(tab.descriptionResId),
             style = AlarmiTheme.typography.caption03r10,
-            color = textColor,
+            color = textColor
 
         )
     }
 }
 
-
 @Preview
 @Composable
 private fun MainBottomBarPreview() {
-
     AlamiTheme {
         var currentTab by remember { mutableStateOf(MainTabType.ALARM) }
         MainBottomBar(
@@ -130,4 +122,3 @@ private fun MainBottomBarPreview() {
         )
     }
 }
-

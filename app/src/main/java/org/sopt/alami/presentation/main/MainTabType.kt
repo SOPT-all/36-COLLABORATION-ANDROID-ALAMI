@@ -4,7 +4,6 @@ import android.R.attr.entries
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
-import androidx.security.crypto.MasterKey
 import org.sopt.alami.R
 import org.sopt.alami.core.navigation.MainTabRoute
 import org.sopt.alami.presentation.alarm.navigation.Alarm
@@ -12,13 +11,11 @@ import org.sopt.alami.presentation.morning.navigation.Morning
 import org.sopt.alami.presentation.report.navigation.Report
 import org.sopt.alami.presentation.setting.navigation.Setting
 import org.sopt.alami.presentation.sleep.navigation.Sleep
-import java.nio.charset.CodingErrorAction.REPORT
-import java.nio.file.attribute.AclEntryType.ALARM
 
 enum class MainTabType(
-    @DrawableRes val selectedIcon : Int,
-    @DrawableRes val unselectedIcon : Int,
-    @StringRes val descriptionResId : Int,
+    @DrawableRes val selectedIcon: Int,
+    @DrawableRes val unselectedIcon: Int,
+    @StringRes val descriptionResId: Int,
     val route: MainTabRoute
 ) {
 
@@ -57,24 +54,16 @@ enum class MainTabType(
         route = Setting
     );
 
-
-    companion object{
+    companion object {
 
         @Composable
-        fun find(predicate: @Composable (MainTabRoute) -> Boolean) : MainTabType? {
-
+        fun find(predicate: @Composable (MainTabRoute) -> Boolean): MainTabType? {
             return entries.find { predicate(it.route) }
-
         }
 
         @Composable
-        fun contains(predicate: @Composable (MainTabRoute)-> Boolean) : Boolean {
-
+        fun contains(predicate: @Composable (MainTabRoute) -> Boolean): Boolean {
             return entries.map { it.route }.any { predicate(it) }
-
         }
-
     }
-
-
 }

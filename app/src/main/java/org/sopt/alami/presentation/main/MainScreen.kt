@@ -9,12 +9,10 @@ import androidx.compose.ui.Modifier
 import kotlinx.collections.immutable.toPersistentList
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
-
 @Composable
 fun MainScreen(
     navigator: MainNavigator = rememberMainNavigator()
-){
-
+) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -25,7 +23,6 @@ fun MainScreen(
                 padding = padding,
                 modifier = Modifier
             )
-
         },
         bottomBar = {
             MainBottomBar(
@@ -41,8 +38,4 @@ fun MainScreen(
         }
 
     )
-
-
-
 }
-

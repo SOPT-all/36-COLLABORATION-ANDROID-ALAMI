@@ -16,11 +16,9 @@ fun NavController.navigateToSleep(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.sleepNavGraph(
     padding: PaddingValues
 ) {
-
     composable<Sleep> {
         SleepRoute(padding)
     }
-
 }
 
 @Serializable

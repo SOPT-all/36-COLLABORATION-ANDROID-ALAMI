@@ -16,11 +16,9 @@ fun NavController.navigateToSetting(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.settingNavGraph(
     padding: PaddingValues
 ) {
-
     composable<Setting> {
         SettingRoute(padding)
     }
-
 }
 
 @Serializable

@@ -23,7 +23,6 @@ fun MainNavHost(
             .fillMaxSize()
 
     ) {
-
         NavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination

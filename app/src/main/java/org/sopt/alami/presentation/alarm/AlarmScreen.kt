@@ -16,23 +16,19 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 fun AlarmRoute(
     padding: PaddingValues
 ) {
-
     AlarmScreen(padding)
-
 }
 
 @Composable
 fun AlarmScreen(
     padding: PaddingValues
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(AlarmiTheme.colors.black),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-
 
     ) {
         Text(
