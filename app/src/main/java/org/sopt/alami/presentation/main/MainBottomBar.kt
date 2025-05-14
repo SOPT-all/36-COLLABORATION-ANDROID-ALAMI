@@ -1,9 +1,6 @@
 package org.sopt.alami.presentation.main
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideIn
@@ -16,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -28,19 +24,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.collections.immutable.toImmutableSet
 import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
-import org.sopt.alami.presentation.morning.MorningRoute
+import org.sopt.alami.core.util.noRippleClickable
 
 @Composable
 fun MainBottomBar(
@@ -61,34 +54,28 @@ fun MainBottomBar(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
 
+
         ) {
 
             Row(
                 modifier = modifier
                     .navigationBarsPadding(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceBetween
 
 
             ) {
-                tabs.forEach { tab->
+                tabs.forEach { tab ->
                     MainBottomBarItem(
                         isSelected = tab == currentTab,
                         tab = tab,
-                        onClick = {onTabSelected(tab)},
-
+                        onClick = { onTabSelected(tab) },
 
                     )
-
                 }
-
             }
-
         }
     }
-
-
-    
 }
 
 
@@ -105,11 +92,8 @@ private fun RowScope.MainBottomBarItem(
 
     Column(
         modifier = Modifier
-            .weight(1f)
-            .selectable(
-                selected = isSelected,
-                onClick = onClick
-            ),
+            .noRippleClickable(onClick = onClick)
+            .weight(1f),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(1.dp, Alignment.CenterVertically)
 
@@ -127,11 +111,8 @@ private fun RowScope.MainBottomBarItem(
             style = AlarmiTheme.typography.caption03r10,
             color = textColor,
 
-
-
         )
     }
-
 }
 
 
@@ -144,8 +125,8 @@ private fun MainBottomBarPreview() {
         MainBottomBar(
             isVisible = true,
             tabs = MainTabType.entries.toImmutableList(),
-            currentTab= currentTab,
-            onTabSelected = {currentTab = it}
+            currentTab = currentTab,
+            onTabSelected = { currentTab = it }
         )
     }
 }
