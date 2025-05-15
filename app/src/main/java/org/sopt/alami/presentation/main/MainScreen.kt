@@ -14,27 +14,22 @@ fun MainScreen(
     navigator: MainNavigator = rememberMainNavigator()
 ) {
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
 
         bottomBar = {
             MainBottomBar(
-                modifier = Modifier
-                    .background(AlarmiTheme.colors.grey800),
+                modifier = Modifier.background(AlarmiTheme.colors.grey800),
                 isVisible = navigator.showBottomNavigator(),
                 tabs = MainTabType.entries.toPersistentList(),
                 currentTab = navigator.currentTab,
                 onTabSelected = navigator::navigate
-
-            )
-        },
-
-        content = { padding ->
-            MainNavHost(
-                navigator = navigator,
-                padding = padding,
-                modifier = Modifier
             )
         }
-    )
+    ) { padding ->
+        MainNavHost(
+            navigator = navigator,
+            padding = padding,
+            modifier = Modifier
+        )
+    }
 }

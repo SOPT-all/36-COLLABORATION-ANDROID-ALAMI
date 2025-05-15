@@ -54,7 +54,7 @@ class MainNavigator(
     }
 
     fun navigateUp() {
-        navController.navigateUp()
+        navController::navigateUp
     }
 
     @Composable
