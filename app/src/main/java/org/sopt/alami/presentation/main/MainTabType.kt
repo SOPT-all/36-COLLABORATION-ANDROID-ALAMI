@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.main
 
-import android.R.attr.entries
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -15,42 +14,42 @@ import org.sopt.alami.presentation.sleep.navigation.Sleep
 enum class MainTabType(
     @DrawableRes val selectedIcon: Int,
     @DrawableRes val unselectedIcon: Int,
-    @StringRes val descriptionResId: Int,
+    @StringRes val label: Int,
     val route: MainTabRoute
 ) {
 
     ALARM(
         selectedIcon = R.drawable.ic_clockon_28,
         unselectedIcon = R.drawable.ic_clockoff_28,
-        descriptionResId = R.string.bottom_navigation_item_alarm,
+        label = R.string.bottom_navigation_item_alarm,
         route = Alarm
     ),
 
     SLEEP(
         selectedIcon = R.drawable.ic_sleep_28,
         unselectedIcon = R.drawable.ic_sleep_28,
-        descriptionResId = R.string.bottom_navigation_item_sleep,
+        label = R.string.bottom_navigation_item_sleep,
         route = Sleep
     ),
 
     MORNING(
         selectedIcon = R.drawable.ic_morningon_28,
         unselectedIcon = R.drawable.ic_morningoff_28,
-        descriptionResId = R.string.bottom_navigation_item_morning,
+        label = R.string.bottom_navigation_item_morning,
         route = Morning
     ),
 
     REPORT(
         selectedIcon = R.drawable.ic_report_28,
         unselectedIcon = R.drawable.ic_report_28,
-        descriptionResId = R.string.bottom_navigation_item_report,
+        label = R.string.bottom_navigation_item_report,
         route = Report
     ),
 
     SETTING(
         selectedIcon = R.drawable.ic_setting_28,
         unselectedIcon = R.drawable.ic_setting_28,
-        descriptionResId = R.string.bottom_navigation_item_setting,
+        label = R.string.bottom_navigation_item_setting,
         route = Setting
     );
 

@@ -19,4 +19,5 @@ fun NavGraphBuilder.alarmNavGraph(
     composable<Alarm> { AlarmRoute(padding) }
 }
 
-@Serializable data object Alarm : MainTabRoute
+@Serializable
+data object Alarm : MainTabRoute

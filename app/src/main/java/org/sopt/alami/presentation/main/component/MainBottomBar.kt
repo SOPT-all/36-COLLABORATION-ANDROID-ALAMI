@@ -1,4 +1,4 @@
-package org.sopt.alami.presentation.main
+package org.sopt.alami.presentation.main.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -34,6 +34,7 @@ import kotlinx.collections.immutable.toImmutableList
 import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 import org.sopt.alami.core.util.noRippleClickable
+import org.sopt.alami.presentation.main.MainTabType
 
 @Composable
 fun MainBottomBar(
@@ -45,8 +46,8 @@ fun MainBottomBar(
 ) {
     AnimatedVisibility(
         visible = isVisible,
-        enter = fadeIn() + slideIn { IntOffset(0, 0) },
-        exit = fadeOut() + slideOut { IntOffset(0, 0) }
+        enter = fadeIn() + slideIn { IntOffset(0, it.height) },
+        exit = fadeOut() + slideOut { IntOffset(0, it.height) }
     ) {
         Surface(
             modifier = modifier
@@ -59,7 +60,6 @@ fun MainBottomBar(
                     .navigationBarsPadding(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
-
             ) {
                 tabs.forEach { tab ->
                     MainBottomBarItem(
@@ -101,7 +101,7 @@ private fun RowScope.MainBottomBarItem(
         )
 
         Text(
-            text = stringResource(tab.descriptionResId),
+            text = stringResource(tab.label),
             style = AlarmiTheme.typography.caption03r10,
             color = textColor
 

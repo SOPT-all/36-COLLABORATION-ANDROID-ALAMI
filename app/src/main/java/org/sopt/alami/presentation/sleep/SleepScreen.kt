@@ -1,5 +1,6 @@
 package org.sopt.alami.presentation.sleep
 
+import android.R.attr.padding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,14 +15,14 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun SleepRoute(
-    padding: PaddingValues
+    paddingValues: PaddingValues
 ) {
-    SleepScreen(padding)
+    SleepScreen(paddingValues)
 }
 
 @Composable
 fun SleepScreen(
-    padding: PaddingValues
+    paddingValues: PaddingValues
 ) {
     Column(
         modifier = Modifier

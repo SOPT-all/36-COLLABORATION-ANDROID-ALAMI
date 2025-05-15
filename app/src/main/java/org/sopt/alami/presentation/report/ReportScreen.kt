@@ -1,5 +1,6 @@
 package org.sopt.alami.presentation.report
 
+import android.R.attr.padding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,14 +15,14 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun ReportRoute(
-    padding: PaddingValues
+    paddingValues: PaddingValues
 ) {
-    ReportScreen(padding)
+    ReportScreen(paddingValues)
 }
 
 @Composable
 fun ReportScreen(
-    padding: PaddingValues
+    paddingValues: PaddingValues
 ) {
     Column(
         modifier = Modifier

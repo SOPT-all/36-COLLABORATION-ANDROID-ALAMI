@@ -16,22 +16,23 @@ import org.sopt.alami.presentation.setting.navigation.navigateToSetting
 import org.sopt.alami.presentation.sleep.navigation.navigateToSleep
 
 class MainNavigator(
-
     val navController: NavHostController
-
 ) {
+
+    val startDestination = Alarm
+
     private val currentDestination: NavDestination?
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-    val startDestination = Alarm
+
 
     val currentTab: MainTabType?
-        @Composable get() = MainTabType.find { mainTabItemType ->
-            currentDestination?.hasRoute(mainTabItemType::class) == true
+        @Composable get() = MainTabType.find { tabRoute ->
+            currentDestination?.hasRoute(tabRoute::class) == true
         }
 
-    fun navigate(mainTabItemType: MainTabType) {
+    fun navigate(tabRoute: MainTabType) {
         val navOptions = navOptions {
             navController.currentDestination?.route?.let {
                 popUpTo(it) {
@@ -43,7 +44,7 @@ class MainNavigator(
             restoreState = true
         }
 
-        when (mainTabItemType) {
+        when (tabRoute) {
             MainTabType.ALARM -> navController.navigateToAlarm(navOptions)
             MainTabType.SLEEP -> navController.navigateToSleep(navOptions)
             MainTabType.MORNING -> navController.navigateToMorning(navOptions)
@@ -65,7 +66,6 @@ class MainNavigator(
 @Composable
 fun rememberMainNavigator(
     navController: NavHostController = rememberNavController()
-
 ): MainNavigator = remember(navController) {
     MainNavigator(navController)
 }
