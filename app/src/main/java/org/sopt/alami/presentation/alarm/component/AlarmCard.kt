@@ -39,7 +39,7 @@ fun AlarmCard(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(12.dp),
     selectedDays: List<DayType>?,
-    meridiem: MeridiemType = MeridiemType.AM,
+    meridiem: MeridiemType,
     alarmTime: AlarmTime,
     isAlarmEnabled: Boolean,
     viewModel: AlarmViewModel = hiltViewModel()

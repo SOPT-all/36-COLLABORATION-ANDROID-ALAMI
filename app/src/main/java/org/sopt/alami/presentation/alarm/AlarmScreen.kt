@@ -4,6 +4,7 @@ import android.R.attr.data
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,6 +36,7 @@ import androidx.room.util.TableInfo
 import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
+import org.sopt.alami.presentation.alarm.component.AddAlarmButton
 import org.sopt.alami.presentation.alarm.component.AlarmCard
 import org.sopt.alami.presentation.alarm.component.AlarmSurface
 import org.sopt.alami.presentation.alarm.model.AlarmTime
@@ -51,71 +54,76 @@ fun AlarmRoute(
 fun AlarmScreen(
     paddingValues: PaddingValues
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues = PaddingValues(16.dp))
 
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues = PaddingValues(16.dp))
 
-        item {
+        ) {
 
-            Row {
-                Spacer(modifier = Modifier.weight(1f))
+            item {
 
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.ic_header_menu_32),
-                    contentDescription = null,
-                    tint = AlarmiTheme.colors.grey200
+                Row {
 
-                )
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_header_menu_32),
+                        contentDescription = null,
+                        tint = AlarmiTheme.colors.grey200
+
+                    )
+
+                }
+
+
+
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                NextAlarmButton(modifier = Modifier)
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                NextAlarmInfo()
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                SleepServiceOn()
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+
+            }
+
+            items(data) { alarmItem ->
+
+                Column {
+
+                    AlarmCard(
+                        paddingValues = PaddingValues(12.dp),
+                        modifier = Modifier,
+                        selectedDays = listOf(DayType.SATURDAY, DayType.WEDNESDAY),
+                        meridiem = MeridiemType.PM,
+                        isAlarmEnabled = true,
+                        alarmTime = AlarmTime(hour = "12", minute = "15")
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                }
 
             }
 
 
-
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            NextAlarmButton(modifier = Modifier)
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            NextAlarmInfo()
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            SleepServiceOn(paddingValues = paddingValues)
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-
         }
 
-        items(data) { alarmItem ->
-
-            Column {
-
-                AlarmCard(
-                    paddingValues = PaddingValues(12.dp),
-                    modifier = Modifier,
-                    selectedDays = listOf(DayType.SATURDAY, DayType.WEDNESDAY),
-                    meridiem = MeridiemType.PM,
-                    isAlarmEnabled = true,
-                    alarmTime = AlarmTime(hour = "12", minute = "15")
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .height(8.dp)
-                )
-
-            }
-
-        }
-
+        AddAlarmButton()
 
     }
+
 }
 
 
@@ -163,16 +171,16 @@ private fun NextAlarmInfo() {
 
 
 @Composable
-private fun SleepServiceOn(paddingValues: PaddingValues) {
+private fun SleepServiceOn() {
 
     AlarmSurface(
         modifier = Modifier,
-        paddingValues = paddingValues
+        paddingValues = PaddingValues(horizontal = 16.dp, vertical = 17.dp)
     ) {
 
         Row(
             modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 17.dp)
+                .padding(vertical = 1.dp)
 
         ) {
 
@@ -184,6 +192,8 @@ private fun SleepServiceOn(paddingValues: PaddingValues) {
             )
 
             Column(
+                modifier = Modifier
+                    .padding(vertical = 4.dp)
 
             ) {
                 Text(
@@ -220,6 +230,8 @@ private fun SleepServiceOn(paddingValues: PaddingValues) {
     }
 
 }
+
+
 
 @Preview
 @Composable
