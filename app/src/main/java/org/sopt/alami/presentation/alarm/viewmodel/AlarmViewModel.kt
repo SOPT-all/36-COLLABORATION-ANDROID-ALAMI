@@ -17,7 +17,7 @@ class AlarmViewModel @Inject constructor() : ViewModel() {
     val isAlarmEnabled: StateFlow<Boolean> = _isAlarmEnabled.asStateFlow()
 
     fun setAlarmEnabled(isEnabled: Boolean) {
-         _isAlarmEnabled.update { !it }
+         _isAlarmEnabled.value = isEnabled
     }
 
 

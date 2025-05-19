@@ -17,6 +17,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +34,7 @@ import org.sopt.alami.presentation.alarm.model.AlarmTime
 import org.sopt.alami.presentation.alarm.model.DayType
 import org.sopt.alami.presentation.alarm.model.MeridiemType
 import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
+import androidx.compose.runtime.getValue
 
 @Composable
 fun AlarmCard(
@@ -41,10 +43,11 @@ fun AlarmCard(
     selectedDays: List<DayType>?,
     meridiem: MeridiemType,
     alarmTime: AlarmTime,
-    isAlarmEnabled: Boolean,
     viewModel: AlarmViewModel = hiltViewModel()
 
 ) {
+
+    val isAlarmEnabled by viewModel.isAlarmEnabled.collectAsState()
 
     val meridiemTime = remember(meridiem) {
         when (meridiem) {
@@ -83,7 +86,7 @@ fun AlarmCard(
                     Text(
                         text = day.label,
                         style = AlarmiTheme.typography.body02b12,
-                        color = if (selectedDays?.contains(day) == true) {
+                        color = if (isAlarmEnabled && selectedDays?.contains(day) == true) {
                             AlarmiTheme.colors.bluePrimary
                         } else {
                             AlarmiTheme.colors.grey400
@@ -172,20 +175,3 @@ fun AlarmCard(
 }
 
 
-@Preview
-@Composable
-private fun AlarmCardPreview() {
-    AlamiTheme {
-        AlarmCard(
-            selectedDays = listOf(DayType.SATURDAY, DayType.THURSDAY),
-            isAlarmEnabled = false,
-            meridiem = MeridiemType.AM,
-            alarmTime = AlarmTime("16", "12"),
-            modifier = Modifier,
-            paddingValues = PaddingValues(12.dp),
-            viewModel = hiltViewModel()
-        )
-
-    }
-
-}
