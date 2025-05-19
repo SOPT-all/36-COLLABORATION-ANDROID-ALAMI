@@ -10,7 +10,7 @@ enum class DayType(val label: String) {
     FRIDAY("금"),
     SATURDAY("토");
 
-    companion object{
+    companion object {
         val Days = listOf(SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY)
     }
 }

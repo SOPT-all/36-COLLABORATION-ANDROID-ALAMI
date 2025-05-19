@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.alarm.component
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,17 +31,14 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun AddAlarmButton(onClicked: () -> Unit) {
-
     var isExpanded by remember { mutableStateOf(false) }
-
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (isExpanded) {
-
             Box(
                 modifier = Modifier
                     .background(color = AlarmiTheme.colors.black.copy(alpha = 0.8f))
-                    .clickable { isExpanded = false },
+                    .clickable { isExpanded = false }
 
             )
         }
@@ -55,9 +51,7 @@ fun AddAlarmButton(onClicked: () -> Unit) {
             horizontalAlignment = Alignment.End
 
         ) {
-
             if (isExpanded) {
-
                 FabItem(
                     title = "습관 알람",
                     icon = ImageVector.vectorResource(R.drawable.ic_floating_calendar_28),
@@ -81,28 +75,32 @@ fun AddAlarmButton(onClicked: () -> Unit) {
                 )
 
                 Spacer(modifier = Modifier.height(17.dp))
-
             }
             FloatingActionButton(
                 onClick = { isExpanded = !isExpanded },
                 shape = CircleShape,
-                containerColor = AlarmiTheme.colors.redPrimary,
+                containerColor = AlarmiTheme.colors.redPrimary
 
-                ) {
+            ) {
                 Icon(
-                    imageVector = if (isExpanded) ImageVector.vectorResource(R.drawable.ic_floating_close_28) else ImageVector.vectorResource(
-                        R.drawable.ic_floating_plus_28
+                    imageVector = if (isExpanded) {
+                        ImageVector.vectorResource(
+                            R.drawable.ic_floating_close_28
+                        )
+                    } else {
+                        ImageVector.vectorResource(
+                            R.drawable.ic_floating_plus_28
 
-                    ),
+                        )
+                    },
                     contentDescription = null,
-                    tint = AlarmiTheme.colors.grey100,
+                    tint = AlarmiTheme.colors.grey100
 
                 )
             }
         }
     }
 }
-
 
 @Composable
 fun FabItem(
@@ -115,8 +113,6 @@ fun FabItem(
             .clickable { onClicked() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-
-
         Text(
             text = title,
             style = AlarmiTheme.typography.body01b15,
@@ -125,7 +121,6 @@ fun FabItem(
 
         Spacer(modifier = Modifier.width(12.dp))
 
-
         Box(
             modifier = Modifier
                 .size(48.dp)
@@ -133,9 +128,8 @@ fun FabItem(
                     color = AlarmiTheme.colors.grey100,
                     shape = CircleShape
                 ),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
-
             Icon(
                 imageVector = icon,
                 contentDescription = null,
@@ -144,4 +138,3 @@ fun FabItem(
         }
     }
 }
-

@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.alarm.component
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,23 +17,21 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import org.sopt.alami.R
-import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 import org.sopt.alami.presentation.alarm.model.AlarmTime
 import org.sopt.alami.presentation.alarm.model.DayType
 import org.sopt.alami.presentation.alarm.model.MeridiemType
 import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
-import androidx.compose.runtime.getValue
 
 @Composable
 fun AlarmCard(
@@ -46,7 +43,6 @@ fun AlarmCard(
     viewModel: AlarmViewModel = hiltViewModel()
 
 ) {
-
     val isAlarmEnabled by viewModel.isAlarmEnabled.collectAsState()
 
     val meridiemTime = remember(meridiem) {
@@ -62,8 +58,6 @@ fun AlarmCard(
         AlarmiTheme.colors.grey400
     }
 
-
-
     AlarmSurface(
         modifier = modifier,
         paddingValues = paddingValues
@@ -74,14 +68,10 @@ fun AlarmCard(
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-
-
             Row(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start
             ) {
-
-
                 DayType.Days.forEach { day ->
                     Text(
                         text = day.label,
@@ -93,8 +83,6 @@ fun AlarmCard(
                         },
                         modifier = modifier.padding(end = 4.dp)
                     )
-
-
                 }
             }
 
@@ -137,7 +125,6 @@ fun AlarmCard(
                         uncheckedBorderColor = Color.Transparent
                     )
 
-
                 )
             }
 
@@ -168,10 +155,6 @@ fun AlarmCard(
                     tint = setColor
                 )
             }
-
         }
     }
-
 }
-
-

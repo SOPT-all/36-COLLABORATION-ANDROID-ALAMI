@@ -4,13 +4,13 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 data class AlarmCardState(
-    val selectedDays : List<DayType> = emptyList(),
+    val selectedDays: List<DayType> = emptyList(),
     val meridiem: MeridiemType = MeridiemType.AM,
     val alarmTime: AlarmTime = AlarmTime(hour = "00", minute = "00"),
     var isAlarmEnabled: Boolean = true
 )
 
-fun AlarmTime.toNextAlarmTime(): LocalDateTime{
+fun AlarmTime.toNextAlarmTime(): LocalDateTime {
     val now = LocalDateTime.now()
     val alarmHour = hour.toInt()
     val alarmMinute = minute.toInt()
@@ -19,7 +19,7 @@ fun AlarmTime.toNextAlarmTime(): LocalDateTime{
 
     return if (todayAlarmTime.isAfter(now)) {
         todayAlarmTime
-    } else{
+    } else {
         todayAlarmTime.plusDays(1)
     }
 }
