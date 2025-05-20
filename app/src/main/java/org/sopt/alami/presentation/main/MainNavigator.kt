@@ -25,8 +25,6 @@ class MainNavigator(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
-
-
     val currentTab: MainTabType?
         @Composable get() = MainTabType.find { tabRoute ->
             currentDestination?.hasRoute(tabRoute::class) == true

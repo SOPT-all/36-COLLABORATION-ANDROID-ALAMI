@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.sleep
 
-import android.R.attr.padding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
