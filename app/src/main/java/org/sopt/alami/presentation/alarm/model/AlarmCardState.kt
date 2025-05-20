@@ -2,9 +2,11 @@ package org.sopt.alami.presentation.alarm.model
 
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 data class AlarmCardState(
-    val selectedDays: List<DayType> = emptyList(),
+    val selectedDays: PersistentList<DayType> = persistentListOf(),
     val meridiem: MeridiemType = MeridiemType.AM,
     val alarmTime: AlarmTime = AlarmTime(hour = "00", minute = "00"),
     var isAlarmEnabled: Boolean = true

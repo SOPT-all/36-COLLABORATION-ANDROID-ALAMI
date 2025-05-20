@@ -16,7 +16,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,26 +24,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.collections.immutable.PersistentList
 import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 import org.sopt.alami.presentation.alarm.model.AlarmTime
 import org.sopt.alami.presentation.alarm.model.DayType
 import org.sopt.alami.presentation.alarm.model.MeridiemType
-import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
 
 @Composable
 fun AlarmCard(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(12.dp),
-    selectedDays: List<DayType>?,
+    selectedDays: PersistentList<DayType>?,
     meridiem: MeridiemType,
     alarmTime: AlarmTime,
-    viewModel: AlarmViewModel = hiltViewModel()
-
+    isAlarmEnabled: Boolean,
+    onToggleAlarm: (Boolean) -> Unit
 ) {
-    val isAlarmEnabled by viewModel.isAlarmEnabled.collectAsState()
-
     val meridiemTime = remember(meridiem) {
         when (meridiem) {
             MeridiemType.AM -> "오전"
@@ -116,7 +112,7 @@ fun AlarmCard(
                         .wrapContentSize(Alignment.Center)
                         .requiredSize(52.dp, 32.dp),
                     checked = isAlarmEnabled,
-                    onCheckedChange = viewModel::setAlarmEnabled,
+                    onCheckedChange = onToggleAlarm,
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = AlarmiTheme.colors.white,
                         checkedTrackColor = AlarmiTheme.colors.bluePrimary,

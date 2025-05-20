@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.asStateFlow
 class AlarmViewModel @Inject constructor() : ViewModel() {
 
     private val _isAlarmEnabled = MutableStateFlow(false)
-    val isAlarmEnabled: StateFlow<Boolean> = _isAlarmEnabled.asStateFlow()
+    val isAlarmEnabled: StateFlow<Boolean>
+        get() = _isAlarmEnabled.asStateFlow()
 
     fun setAlarmEnabled(isEnabled: Boolean) {
         _isAlarmEnabled.value = isEnabled

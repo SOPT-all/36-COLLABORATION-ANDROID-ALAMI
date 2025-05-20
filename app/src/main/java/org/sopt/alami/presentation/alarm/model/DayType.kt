@@ -1,5 +1,8 @@
 package org.sopt.alami.presentation.alarm.model
 
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
+
 enum class DayType(val label: String) {
 
     SUNDAY("일"),
@@ -11,6 +14,7 @@ enum class DayType(val label: String) {
     SATURDAY("토");
 
     companion object {
-        val Days = listOf(SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY)
+        val Days: PersistentList<DayType> =
+            persistentListOf(SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY)
     }
 }

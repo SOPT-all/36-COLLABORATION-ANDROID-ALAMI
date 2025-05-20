@@ -33,20 +33,21 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 fun AddAlarmButton(onClicked: () -> Unit) {
     var isExpanded by remember { mutableStateOf(false) }
 
+    if (isExpanded) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = AlarmiTheme.colors.black.copy(alpha = 0.8f))
+                .clickable { isExpanded = false }
+
+        )
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
-        if (isExpanded) {
-            Box(
-                modifier = Modifier
-                    .background(color = AlarmiTheme.colors.black.copy(alpha = 0.8f))
-                    .clickable { isExpanded = false }
-
-            )
-        }
-
         Column(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(bottom = 76.dp),
+                .padding(bottom = 96.dp, end = 16.dp),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.End
 
@@ -79,7 +80,7 @@ fun AddAlarmButton(onClicked: () -> Unit) {
             FloatingActionButton(
                 onClick = { isExpanded = !isExpanded },
                 shape = CircleShape,
-                containerColor = AlarmiTheme.colors.redPrimary
+                containerColor = if (isExpanded) AlarmiTheme.colors.redSecondary else AlarmiTheme.colors.redPrimary
 
             ) {
                 Icon(
