@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -67,26 +68,36 @@ fun AddMission(
                         .padding(end = 15.dp)
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.ic_mission_off),
+                    painter = painterResource(id = R.drawable.img_setting_mission),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = 15.dp)
+                        .height(68.dp)
+                        .width(68.dp)
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.ic_mission_off),
+                    painter = painterResource(id = R.drawable.img_setting_mission),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = 15.dp)
+                        .height(68.dp)
+                        .width(68.dp)
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.ic_mission_off),
+                    painter = painterResource(id = R.drawable.img_setting_mission),
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = 15.dp)
+                        .height(68.dp)
+                        .width(68.dp)
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.ic_mission_off),
-                    contentDescription = null
+                    painter = painterResource(id = R.drawable.img_setting_mission),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(end = 15.dp)
+                        .height(68.dp)
+                        .width(68.dp)
                 )
             }
 

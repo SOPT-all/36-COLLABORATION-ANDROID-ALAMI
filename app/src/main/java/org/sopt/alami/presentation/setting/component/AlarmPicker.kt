@@ -22,20 +22,39 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun AlarmPicker() {
-    val hours = (1..12).toList()
+    val ampm = listOf("오전", "오후")
+    val hours = (1..12).map { it.toString() }
     val minutes = (0..59).map { it.toString().padStart(2, '0') }
 
-    Box {
-
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(240.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(240.dp)
+                .background(AlarmiTheme.colors.grey800),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            TimeColumn(items = ampm)
+            TimeColumn(items = hours)
+            Spacer(modifier = Modifier.width(40.dp))
+            TimeColumn(items = minutes)
+        }
         Box(
             modifier = Modifier
+                .zIndex(1f)
                 .align(Alignment.Center)
                 .fillMaxWidth()
                 .height(48.dp)
@@ -44,62 +63,65 @@ fun AlarmPicker() {
                 .background(AlarmiTheme.colors.grey600.copy(alpha = 0.8f))
         )
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(240.dp)
-                .background(AlarmiTheme.colors.grey800),
-            horizontalArrangement = Arrangement.Center
-        ) {
 
-            TimeColumn(items = listOf("오전", "오후"), isScrollable = true)
-
-            TimeColumn(items = hours.map { it.toString() }, isScrollable = true)
-            Spacer(modifier = Modifier.width(40.dp))
-
-            TimeColumn(items = minutes, isScrollable = true)
-        }
     }
 }
 
 @Composable
-fun TimeColumn(items: List<String>, isScrollable: Boolean = true) {
+fun TimeColumn(
+    items: List<String>,
+    visibleItemsCount: Int = 5,
+) {
     val listState = rememberLazyListState()
-    val visibleMiddleIndex by remember {
+    val itemHeightDp = 48.dp
+    val itemHeightPx = with(LocalDensity.current) { itemHeightDp.toPx() }
+    val middleIndex = visibleItemsCount / 2
+    val paddingSize = middleIndex
+    val paddedItems = List(paddingSize) { "" } + items + List(paddingSize) { "" }
+
+    val centerY by remember {
         derivedStateOf {
-            if (isScrollable) {
-                listState.firstVisibleItemIndex + 2
-            } else {
-                0
-            }
+            itemHeightPx * middleIndex
         }
     }
 
-    LazyColumn(
-        state = listState,
+    Box(
         modifier = Modifier
             .width(73.dp)
-            .fillMaxHeight(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        userScrollEnabled = isScrollable
+            .fillMaxHeight()
     ) {
-        itemsIndexed(items) { index, item ->
-            val isSelected = index == visibleMiddleIndex
-            Text(
-                text = item,
-                style = if (isSelected)
-                    AlarmiTheme.typography.title02b30
-                else
-                    AlarmiTheme.typography.title03b22,
-                color = if (isSelected)
-                    AlarmiTheme.colors.white
-                else
-                    AlarmiTheme.colors.grey400,
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-            )
+        LazyColumn(
+            state = listState,
+            modifier = Modifier
+                .width(73.dp)
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            itemsIndexed(paddedItems) { index, item ->
+                val layoutInfo = listState.layoutInfo.visibleItemsInfo.find { it.index == index }
+                val itemCenter = layoutInfo?.let { it.offset + it.size / 2 }
+                val isSelected =
+                    item.isNotBlank() && itemCenter != null && kotlin.math.abs(itemCenter - centerY) < itemHeightPx / 2
+
+                Text(
+                    text = item,
+                    style = if (isSelected)
+                        AlarmiTheme.typography.title02b30
+                    else
+                        AlarmiTheme.typography.title03b22,
+                    color = if (isSelected)
+                        AlarmiTheme.colors.white
+                    else
+                        AlarmiTheme.colors.grey400,
+                    modifier = Modifier
+                        .zIndex(if (isSelected) 4f else 0f)
+                        .height(itemHeightDp)
+                        .padding(vertical = 4.dp)
+                )
+            }
         }
+
     }
 }
 

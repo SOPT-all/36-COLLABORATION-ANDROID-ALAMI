@@ -54,7 +54,6 @@ fun SoundProgress(
 
         Spacer(modifier = Modifier.width(12.dp))
 
-
         Slider(
             value = currentPosition,
             onValueChange = onSeek,

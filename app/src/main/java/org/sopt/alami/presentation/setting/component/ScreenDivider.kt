@@ -1,9 +1,7 @@
 package org.sopt.alami.presentation.setting.component
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,13 +13,14 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 fun ScreenDivider(
 
 ) {
-    Box(
+    HorizontalDivider(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(8.dp)
-            .background(color = AlarmiTheme.colors.black)
-    ) {
-    }
+            .fillMaxWidth(),
+        thickness = 8.dp,
+        color = AlarmiTheme.colors.black
+
+    )
+
 }
 
 @Preview(showBackground = true)

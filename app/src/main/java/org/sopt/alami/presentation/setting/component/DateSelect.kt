@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -30,15 +31,13 @@ fun DateSelect(
             .height(136.dp)
             .background(color = AlarmiTheme.colors.grey800)
             .padding(start = 22.dp, end = 22.dp),
-
-
         ) {
         Spacer(modifier = Modifier.height(20.dp))
         Row(
 
         ) {
             Text(
-                text = "월, 화, 수, 목, 금, 토, 일",
+                text = "일, 월, 화, 수, 목, 금, 토",
                 style = AlarmiTheme.typography.body01b15,
                 color = AlarmiTheme.colors.white,
                 modifier = Modifier
@@ -58,13 +57,12 @@ fun DateSelect(
                     .padding(start = 12.dp)
             )
 
-
         }
         Spacer(modifier = Modifier.height(24.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(13.dp)
+            horizontalArrangement = Arrangement.spacedBy(13.dp, Alignment.CenterHorizontally)
         ) {
             Image(
                 imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_sunday),
@@ -94,8 +92,6 @@ fun DateSelect(
                 imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_saturday),
                 contentDescription = null
             )
-
-
         }
     }
 
