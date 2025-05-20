@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="68dp"
+    android:height="68dp"
+    android:viewportWidth="68"
+    android:viewportHeight="68">
+
+  <!-- 사각형 테두리 (점선 불가 → 실선으로 대체됨) -->
+  <path
+      android:pathData="M0.5,8C0.5,3.8579 3.8579,0.5 8,0.5H60C64.1421,0.5 67.5,3.8579 67.5,8V60C67.5,64.1421 64.1421,67.5 60,67.5H8C3.8579,67.5 0.5,64.1421 0.5,60V8Z"
+      android:strokeColor="#484C57"
+      android:strokeWidth="1"
+      android:fillColor="@android:color/transparent" />
+
+  <!-- 수직 선 -->
+  <path
+      android:pathData="M34,28.1666L34,39.8333"
+      android:strokeColor="#484C57"
+      android:strokeWidth="1.5"
+      android:strokeLineCap="round"
+      android:fillColor="@android:color/transparent" />
+
+  <!-- 수평 선 -->
+  <path
+      android:pathData="M39.834,34L28.1673,34"
+      android:strokeColor="#484C57"
+      android:strokeWidth="1.5"
+      android:strokeLineCap="round"
+      android:fillColor="@android:color/transparent" />
+
+</vector>
