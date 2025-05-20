@@ -28,6 +28,7 @@ import org.sopt.alami.presentation.setting.component.DateSelect
 import org.sopt.alami.presentation.setting.component.ScreenDivider
 import org.sopt.alami.presentation.setting.component.SettingBox
 import org.sopt.alami.presentation.setting.component.SoundProgress
+import org.sopt.alami.presentation.setting.model.SettingItem
 
 
 @Composable
@@ -42,6 +43,13 @@ fun SettingScreen(
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
+    val settingItems = listOf(
+        SettingItem("사운드", "오르카니"),
+        SettingItem("사운드 파워웝", "1개 사용"),
+        SettingItem("알람 미루기", "5분,3회"),
+        SettingItem("메모", "메모 없음"),
+        SettingItem("다시 잠들기 방지", "사용 안함")
+    )
 
     AlamiButton(text = "저장", onClick = {})
 
@@ -81,7 +89,7 @@ fun SettingScreen(
             AlarmPicker()
         }
         item {
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             ScreenDivider()
         }
         item {
@@ -97,32 +105,21 @@ fun SettingScreen(
             ScreenDivider()
         }
         item {
-            Spacer(modifier = Modifier.height(20.dp))
             SoundProgress(currentPosition = 1f, onSeek = {})
         }
-        item {
+        items(settingItems.size) { index ->
+            val item = settingItems[index]
+
             Spacer(modifier = Modifier.height(24.dp))
-            SettingBox(text = "사운드", subtext = "오르카니")
-        }
-        item {
-            Spacer(modifier = Modifier.height(24.dp))
-            SettingBox(text = "사운드 파워웝", subtext = "1개 사용")
-        }
-        item {
-            Spacer(modifier = Modifier.height(20.dp))
-            ScreenDivider()
-        }
-        item {
-            Spacer(modifier = Modifier.height(24.dp))
-            SettingBox(text = "알람 미루기", subtext = "5분,3회")
-        }
-        item {
-            Spacer(modifier = Modifier.height(24.dp))
-            SettingBox(text = "메모", subtext = "메모 없음")
-        }
-        item {
-            Spacer(modifier = Modifier.height(24.dp))
-            SettingBox(text = "다시 잠들기 방지", subtext = "사용 안함")
+
+            SettingBox(
+                text = item.title,
+                subtext = item.subtitle,
+            )
+            if (index == 1) {
+                Spacer(modifier = Modifier.height(20.dp))
+                ScreenDivider()
+            }
         }
 
     }
