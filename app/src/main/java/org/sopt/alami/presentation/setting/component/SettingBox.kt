@@ -21,7 +21,7 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 fun SettingBox(
     text: String,
     subtext: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -46,14 +46,14 @@ fun SettingBox(
             color = AlarmiTheme.colors.white
         )
         Image(
-            imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_button_detail),
+            imageVector = ImageVector.vectorResource(
+                id = org.sopt.alami.R.drawable.ic_button_detail
+            ),
             contentDescription = null,
             modifier = Modifier
                 .padding(top = 4.dp)
         )
-
     }
-
 }
 
 @Preview(showBackground = true)

@@ -10,9 +10,7 @@ import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
-fun ScreenDivider(
-
-) {
+fun ScreenDivider() {
     HorizontalDivider(
         modifier = Modifier
             .fillMaxWidth(),
@@ -20,7 +18,6 @@ fun ScreenDivider(
         color = AlarmiTheme.colors.black
 
     )
-
 }
 
 @Preview(showBackground = true)
