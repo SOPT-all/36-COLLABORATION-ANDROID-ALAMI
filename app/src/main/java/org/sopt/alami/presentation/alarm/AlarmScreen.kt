@@ -73,7 +73,6 @@ fun AlarmScreen(
         alarmTime = AlarmTime(hour = "12", minute = "15")
     )
 
-    val isAlarmEnabled by viewModel.isAlarmEnabled.collectAsState()
 
     val alarmList = viewModel.alarmList
 
@@ -108,9 +107,6 @@ fun AlarmScreen(
         }
 
         itemsIndexed(alarmList) { index, alarmState ->
-
-            //val alarmState = alarmItem.toAlarmCardState()
-
 
             Column {
                 AlarmCard(

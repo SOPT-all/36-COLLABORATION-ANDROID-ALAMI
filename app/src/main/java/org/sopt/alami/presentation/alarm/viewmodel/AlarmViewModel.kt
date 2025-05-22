@@ -25,9 +25,7 @@ class AlarmViewModel @Inject constructor(
 
     var alarmList by mutableStateOf<List<AlarmCardState>>(emptyList())
 
-    var isLoading by mutableStateOf(false)
 
-    var errorMessage by mutableStateOf<String?>(null)
 
     private val _isAlarmEnabled = MutableStateFlow(false)
     val isAlarmEnabled: StateFlow<Boolean>
@@ -39,24 +37,38 @@ class AlarmViewModel @Inject constructor(
 
     fun fetchAlarm(userId: Long) {
         viewModelScope.launch {
-            isLoading = true
             repository.getAlarmList(userId)
                 .onSuccess {
                     alarmList = it.map { dto -> dto.toAlarmCardState() }
-                    errorMessage = null
-                }
-                .onFailure {
-                    errorMessage = it.message
 
                 }
-            isLoading = false
+                .onFailure {
+                    Timber.e("알람 목록 불러오기 실패 : ${it.message}")
+                }
         }
     }
 
     fun setAlarmEnabled(index: Int, isEnabled: Boolean) {
-        //_isAlarmEnabled.value = isEnabled
         alarmList = alarmList.toMutableList().also {
             it[index] = it[index].copy(isAlarmEnabled = isEnabled)
+        }
+    }
+
+    fun checkAlarmTime(userId: Long) {
+        viewModelScope.launch {
+            repository.getAlarmTimeCheck(userId)
+                .onSuccess { result->
+
+                    val shouldTrigger = result?.alarmInfo?.any {it.shouldTrigger} == true
+
+                    if (shouldTrigger) {
+
+                    }
+
+                }
+                .onFailure {
+                    Timber.e("알람 체크 실패 : ${it.message}")
+                }
         }
     }
 }
