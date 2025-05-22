@@ -25,11 +25,13 @@ class AlarmViewModel @Inject constructor(
 
     var alarmList by mutableStateOf<List<AlarmCardState>>(emptyList())
 
-
-
     private val _isAlarmEnabled = MutableStateFlow(false)
     val isAlarmEnabled: StateFlow<Boolean>
         get() = _isAlarmEnabled.asStateFlow()
+
+    private val _shouldTrigger = MutableStateFlow(false)
+    val shouldTrigger: StateFlow<Boolean>
+        get() = _shouldTrigger.asStateFlow()
 
     init {
         fetchAlarm(userId = 1)
@@ -57,17 +59,15 @@ class AlarmViewModel @Inject constructor(
     fun checkAlarmTime(userId: Long) {
         viewModelScope.launch {
             repository.getAlarmTimeCheck(userId)
-                .onSuccess { result->
+                .onSuccess { result ->
 
-                    val shouldTrigger = result?.alarmInfo?.any {it.shouldTrigger} == true
-
-                    if (shouldTrigger) {
-
-                    }
+                    val isTriggered = result?.alarmInfo?.any { it.shouldTrigger }
+                    _shouldTrigger.value = isTriggered == true
 
                 }
                 .onFailure {
                     Timber.e("알람 체크 실패 : ${it.message}")
+                    _shouldTrigger.value = false
                 }
         }
     }

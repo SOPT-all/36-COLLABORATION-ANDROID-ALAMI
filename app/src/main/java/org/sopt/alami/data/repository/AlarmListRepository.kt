@@ -1,13 +1,11 @@
 package org.sopt.alami.data.repository
 
-import kotlinx.collections.immutable.ImmutableList
 import org.sopt.alami.data.dto.AlarmListDto
 import org.sopt.alami.data.dto.AlarmTimeCheckDto
 import org.sopt.alami.data.service.AlarmListService
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
-import kotlin.concurrent.timer
 
 class AlarmListRepository @Inject constructor(
     private val alarmListService: AlarmListService
@@ -37,7 +35,7 @@ class AlarmListRepository @Inject constructor(
             if (response.success) {
                 response.data
             } else {
-                throw Exception(response.error?.message ?:"")
+                throw Exception(response.error?.message ?: "")
             }
-        }
+     }
 }

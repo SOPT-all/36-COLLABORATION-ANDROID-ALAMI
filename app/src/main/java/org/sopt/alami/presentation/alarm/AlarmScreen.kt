@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.alarm
 
-import android.R.attr.data
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -33,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.delay
 import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
@@ -44,7 +43,6 @@ import org.sopt.alami.presentation.alarm.model.AlarmTime
 import org.sopt.alami.presentation.alarm.model.DayType
 import org.sopt.alami.presentation.alarm.model.MeridiemType
 import org.sopt.alami.presentation.alarm.model.getTimeUntilAlarm
-import org.sopt.alami.presentation.alarm.model.toAlarmCardState
 import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
 
 @Composable
@@ -75,6 +73,22 @@ fun AlarmScreen(
 
 
     val alarmList = viewModel.alarmList
+
+    val shouldTrigger by viewModel.shouldTrigger.collectAsState()
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(1000)
+            viewModel.checkAlarmTime(userId = 1)
+        }
+    }
+
+    LaunchedEffect(shouldTrigger) {
+        if (shouldTrigger) {
+            /*Todo navigate 연결*/
+
+        }
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -116,7 +130,7 @@ fun AlarmScreen(
                     meridiem = alarmState.meridiem,
                     alarmTime = alarmState.alarmTime,
                     isAlarmEnabled = alarmState.isAlarmEnabled,
-                    onToggleAlarm = { isEnabled->
+                    onToggleAlarm = { isEnabled ->
                         viewModel.setAlarmEnabled(index, isEnabled)
                     }
                 )

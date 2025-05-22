@@ -13,7 +13,7 @@ interface AlarmListService {
     @GET("/api/v1/alarms")
     suspend fun getAlarmList(
         @Header("userId") userId: Long
-    ) : BaseResponse<List<AlarmListDto>>
+    ): BaseResponse<List<AlarmListDto>>
 
     @GET("/api/v1/alarm/check")
     suspend fun getAlarmTimeCheck(
