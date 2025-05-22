@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class AlarmListDto (
 
     @SerialName("id")
-    val id : Long,
+    val id: Long,
     @SerialName("timestamp")
     val timestamp: String,
     @SerialName("isActive")

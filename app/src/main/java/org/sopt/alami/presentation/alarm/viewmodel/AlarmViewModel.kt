@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.alarm.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,7 +11,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.sopt.alami.data.dto.AlarmListDto
 import org.sopt.alami.data.repository.AlarmListRepository
 import org.sopt.alami.presentation.alarm.model.AlarmCardState
 import org.sopt.alami.presentation.alarm.model.toAlarmCardState
@@ -42,7 +40,6 @@ class AlarmViewModel @Inject constructor(
             repository.getAlarmList(userId)
                 .onSuccess {
                     alarmList = it.map { dto -> dto.toAlarmCardState() }
-
                 }
                 .onFailure {
                     Timber.e("알람 목록 불러오기 실패 : ${it.message}")
@@ -63,7 +60,6 @@ class AlarmViewModel @Inject constructor(
 
                     val isTriggered = result?.alarmInfo?.any { it.shouldTrigger }
                     _shouldTrigger.value = isTriggered == true
-
                 }
                 .onFailure {
                     Timber.e("알람 체크 실패 : ${it.message}")

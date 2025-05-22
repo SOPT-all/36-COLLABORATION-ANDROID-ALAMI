@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AlarmTimeCheckDto(
     @SerialName("alarmInfo")
-    val alarmInfo: List<AlarmInfoDto>,
+    val alarmInfo: List<AlarmInfoDto>
 )
 
 @Serializable

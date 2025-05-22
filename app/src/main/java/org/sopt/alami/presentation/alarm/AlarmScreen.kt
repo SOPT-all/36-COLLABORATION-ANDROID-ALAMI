@@ -63,14 +63,11 @@ fun AlarmScreen(
     onClick: () -> Unit,
     viewModel: AlarmViewModel = hiltViewModel()
 ) {
-
-
     val alarmState = AlarmCardState(
         selectedDays = persistentListOf(DayType.SATURDAY, DayType.WEDNESDAY),
         meridiem = MeridiemType.PM,
         alarmTime = AlarmTime(hour = "12", minute = "15")
     )
-
 
     val alarmList = viewModel.alarmList
 
@@ -86,7 +83,6 @@ fun AlarmScreen(
     LaunchedEffect(shouldTrigger) {
         if (shouldTrigger) {
             /*Todo navigate 연결*/
-
         }
     }
 

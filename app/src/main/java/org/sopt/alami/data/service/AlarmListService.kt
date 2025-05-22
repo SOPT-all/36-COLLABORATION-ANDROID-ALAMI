@@ -1,6 +1,5 @@
 package org.sopt.alami.data.service
 
-
 import org.sopt.alami.core.network.BaseResponse
 import org.sopt.alami.data.dto.AlarmListDto
 import org.sopt.alami.data.dto.AlarmTimeCheckDto
@@ -20,6 +19,4 @@ interface AlarmListService {
         @Header("userId") userId: Long,
         @Query("currentTime") currentTime: String
     ): BaseResponse<AlarmTimeCheckDto>
-
-
 }
