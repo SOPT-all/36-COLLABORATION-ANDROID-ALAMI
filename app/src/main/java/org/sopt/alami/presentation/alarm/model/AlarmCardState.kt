@@ -4,6 +4,8 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.selects.select
+import org.sopt.alami.data.dto.AlarmListDto
 
 data class AlarmCardState(
     val selectedDays: PersistentList<DayType> = persistentListOf(),
@@ -11,6 +13,19 @@ data class AlarmCardState(
     val alarmTime: AlarmTime = AlarmTime(hour = "00", minute = "00"),
     var isAlarmEnabled: Boolean = true
 )
+
+fun AlarmListDto.toAlarmCardState() : AlarmCardState {
+    val (hour, minute) = timestamp.split(":")
+
+    val meridiem = if ((hour.toIntOrNull() ?: 0) < 12) MeridiemType.AM else MeridiemType.PM
+
+    return AlarmCardState(
+        selectedDays = DayType.Days,
+        meridiem = meridiem,
+        alarmTime = AlarmTime(hour,minute),
+        isAlarmEnabled = isActive
+    )
+}
 
 fun AlarmTime.toNextAlarmTime(): LocalDateTime {
     val now = LocalDateTime.now()

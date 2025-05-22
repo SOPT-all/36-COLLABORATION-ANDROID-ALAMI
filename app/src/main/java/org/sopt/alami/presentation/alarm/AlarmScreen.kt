@@ -13,10 +13,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -41,6 +44,7 @@ import org.sopt.alami.presentation.alarm.model.AlarmTime
 import org.sopt.alami.presentation.alarm.model.DayType
 import org.sopt.alami.presentation.alarm.model.MeridiemType
 import org.sopt.alami.presentation.alarm.model.getTimeUntilAlarm
+import org.sopt.alami.presentation.alarm.model.toAlarmCardState
 import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
 
 @Composable
@@ -61,6 +65,8 @@ fun AlarmScreen(
     onClick: () -> Unit,
     viewModel: AlarmViewModel = hiltViewModel()
 ) {
+
+
     val alarmState = AlarmCardState(
         selectedDays = persistentListOf(DayType.SATURDAY, DayType.WEDNESDAY),
         meridiem = MeridiemType.PM,
@@ -68,6 +74,8 @@ fun AlarmScreen(
     )
 
     val isAlarmEnabled by viewModel.isAlarmEnabled.collectAsState()
+
+    val alarmList = viewModel.alarmList
 
     LazyColumn(
         modifier = Modifier
@@ -99,7 +107,11 @@ fun AlarmScreen(
             Spacer(modifier = Modifier.height(8.dp))
         }
 
-        items(data) {
+        itemsIndexed(alarmList) { index, alarmState ->
+
+            //val alarmState = alarmItem.toAlarmCardState()
+
+
             Column {
                 AlarmCard(
                     paddingValues = PaddingValues(12.dp),
@@ -107,8 +119,10 @@ fun AlarmScreen(
                     selectedDays = alarmState.selectedDays,
                     meridiem = alarmState.meridiem,
                     alarmTime = alarmState.alarmTime,
-                    isAlarmEnabled = isAlarmEnabled,
-                    onToggleAlarm = viewModel::setAlarmEnabled
+                    isAlarmEnabled = alarmState.isAlarmEnabled,
+                    onToggleAlarm = { isEnabled->
+                        viewModel.setAlarmEnabled(index, isEnabled)
+                    }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
             }
