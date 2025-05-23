@@ -1,6 +1,5 @@
 package org.sopt.alami.presentation.setting
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,10 +30,9 @@ import org.sopt.alami.presentation.setting.component.SettingBox
 import org.sopt.alami.presentation.setting.component.SoundProgress
 import org.sopt.alami.presentation.setting.model.SettingItem
 
-
 @Composable
 fun SettingRoute(
-    paddingValues: PaddingValues,
+    paddingValues: PaddingValues
 ) {
     SettingScreen(paddingValues)
 }
@@ -42,7 +40,7 @@ fun SettingRoute(
 @Composable
 fun SettingScreen(
     paddingValues: PaddingValues,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val settingItems = listOf(
         SettingItem("사운드", "오르카니"),
@@ -95,17 +93,9 @@ fun SettingScreen(
         }
         item {
             DateSelect()
-        }
-        item {
             ScreenDivider()
-        }
-        item {
             AddMission()
-        }
-        item {
             ScreenDivider()
-        }
-        item {
             SoundProgress(currentPosition = 1f, onSeek = {})
         }
         items(settingItems.size) { index ->
@@ -115,18 +105,15 @@ fun SettingScreen(
 
             SettingBox(
                 text = item.title,
-                subtext = item.subtitle,
+                subtext = item.subtitle
             )
             if (index == 1) {
                 Spacer(modifier = Modifier.height(20.dp))
                 ScreenDivider()
             }
         }
-
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable

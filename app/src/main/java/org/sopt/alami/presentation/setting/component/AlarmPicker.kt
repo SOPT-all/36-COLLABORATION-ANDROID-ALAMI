@@ -62,15 +62,13 @@ fun AlarmPicker() {
                 .clip(RoundedCornerShape(8.dp))
                 .background(AlarmiTheme.colors.grey600.copy(alpha = 0.8f))
         )
-
-
     }
 }
 
 @Composable
 fun TimeColumn(
     items: List<String>,
-    visibleItemsCount: Int = 5,
+    visibleItemsCount: Int = 5
 ) {
     val listState = rememberLazyListState()
     val itemHeightDp = 48.dp
@@ -106,14 +104,16 @@ fun TimeColumn(
 
                 Text(
                     text = item,
-                    style = if (isSelected)
+                    style = if (isSelected) {
                         AlarmiTheme.typography.title02b30
-                    else
-                        AlarmiTheme.typography.title03b22,
-                    color = if (isSelected)
+                    } else {
+                        AlarmiTheme.typography.title03b22
+                    },
+                    color = if (isSelected) {
                         AlarmiTheme.colors.white
-                    else
-                        AlarmiTheme.colors.grey400,
+                    } else {
+                        AlarmiTheme.colors.grey400
+                    },
                     modifier = Modifier
                         .zIndex(if (isSelected) 4f else 0f)
                         .height(itemHeightDp)
@@ -121,10 +121,8 @@ fun TimeColumn(
                 )
             }
         }
-
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

@@ -32,7 +32,13 @@ android {
         buildConfigField(
             "String",
             "BASE_URL",
-            properties.getProperty("base.url")
+            properties["base.url"] as String
+        )
+
+        buildConfigField(
+            "int",
+            "USER_ID",
+            properties["user.id"] as String
         )
     }
 
@@ -60,7 +66,7 @@ android {
 
 dependencies {
 
-// Test
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.bundles.test)
