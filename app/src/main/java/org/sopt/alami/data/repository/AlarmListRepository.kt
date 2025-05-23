@@ -17,7 +17,7 @@ class AlarmListRepository @Inject constructor(
             if (response.success) {
                 response.data.orEmpty()
             } else {
-                throw Exception(response.error?.message ?: "")
+                throw Exception()
             }
         }
 
@@ -31,7 +31,7 @@ class AlarmListRepository @Inject constructor(
             if (response.success) {
                 response.data
             } else {
-                throw Exception(response.error?.message ?: "")
+                throw Exception()
             }
         }
 }
