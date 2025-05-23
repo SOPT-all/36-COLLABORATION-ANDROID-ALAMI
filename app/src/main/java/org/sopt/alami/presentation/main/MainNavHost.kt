@@ -23,7 +23,7 @@ fun MainNavHost(
 
     ) {
         alarmNavGraph(
-            padding =padding,
+            padding = padding,
             navigateToAlarmDismiss = navigator::navigateToAlarmDismiss
         )
         sleepNavGraph(padding)

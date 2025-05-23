@@ -39,22 +39,18 @@ import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
 @Composable
 fun AlarmRoute(
     paddingValues: PaddingValues,
-    navigateToAlarmDismiss:() -> Unit,
+    navigateToAlarmDismiss: () -> Unit,
     viewModel: AlarmViewModel = hiltViewModel()
 ) {
-
     val alarmList = viewModel.alarmList
 
     val shouldTrigger by viewModel.shouldTrigger.collectAsStateWithLifecycle()
 
     val nextAlarmTime by viewModel.nextAlarmTime.collectAsStateWithLifecycle()
 
-
-
     LaunchedEffect(shouldTrigger) {
         if (shouldTrigger) {
             navigateToAlarmDismiss()
-
         }
     }
 
@@ -85,7 +81,6 @@ fun AlarmScreen(
     onClick: () -> Unit
 
 ) {
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -167,7 +162,6 @@ private fun NextAlarmButton(modifier: Modifier) {
 
 @Composable
 private fun NextAlarmInfo(alarmTime: String) {
-
     Text(
         text = alarmTime,
         style = AlarmiTheme.typography.title03b22,
@@ -230,4 +224,3 @@ private fun SleepServiceOn() {
         }
     }
 }
-

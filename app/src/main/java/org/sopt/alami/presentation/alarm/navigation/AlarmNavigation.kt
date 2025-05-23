@@ -16,11 +16,14 @@ fun NavController.navigateToAlarm(navOptions: NavOptions ? = null) {
 
 fun NavGraphBuilder.alarmNavGraph(
     padding: PaddingValues,
-    navigateToAlarmDismiss:() -> Unit
+    navigateToAlarmDismiss: () -> Unit
 ) {
-    composable<Alarm> { AlarmRoute(
-        paddingValues = padding,
-        navigateToAlarmDismiss = navigateToAlarmDismiss) }
+    composable<Alarm> {
+        AlarmRoute(
+            paddingValues = padding,
+            navigateToAlarmDismiss = navigateToAlarmDismiss
+        )
+    }
 }
 
 @Serializable
