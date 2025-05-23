@@ -1,5 +1,6 @@
 package org.sopt.alami.presentation.morning.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,15 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun TodaySentence(
-    imageUrl: String,
+    imageUrl: Int,
     modifier: Modifier = Modifier
 ) {
     MorningSurface(
@@ -59,11 +59,18 @@ fun TodaySentence(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
-                    .crossfade(true)
-                    .build(),
+            Image(
+                painter = painterResource(
+                    id = when (imageUrl) {
+                        1 -> R.drawable.img_today_quote1_and
+                        2 -> R.drawable.img_today_quote2_and
+                        3 -> R.drawable.img_today_quote3_and
+                        4 -> R.drawable.img_today_quote4_and
+                        5 -> R.drawable.img_today_quote5_and
+                        6 -> R.drawable.img_today_quote6_and
+                        else -> R.drawable.img_today_quote1_and
+                    }
+                ),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = modifier

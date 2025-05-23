@@ -24,7 +24,7 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun AddMission(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = Modifier
@@ -100,9 +100,7 @@ fun AddMission(
                         .width(68.dp)
                 )
             }
-
         }
-
     }
 }
 

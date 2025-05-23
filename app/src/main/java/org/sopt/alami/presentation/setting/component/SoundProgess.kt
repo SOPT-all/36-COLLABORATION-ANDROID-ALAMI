@@ -36,7 +36,7 @@ fun SoundProgress(
     currentPosition: Float,
     onSeek: (Float) -> Unit,
     onValueChangeFinished: (() -> Unit)? = null,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier

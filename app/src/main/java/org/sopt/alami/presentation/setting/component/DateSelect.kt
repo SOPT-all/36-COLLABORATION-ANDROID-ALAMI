@@ -22,20 +22,17 @@ import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
 fun DateSelect(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(136.dp)
             .background(color = AlarmiTheme.colors.grey800)
-            .padding(start = 22.dp, end = 22.dp),
-        ) {
+            .padding(start = 22.dp, end = 22.dp)
+    ) {
         Spacer(modifier = Modifier.height(20.dp))
-        Row(
-
-        ) {
+        Row() {
             Text(
                 text = "일, 월, 화, 수, 목, 금, 토",
                 style = AlarmiTheme.typography.body01b15,
@@ -45,7 +42,9 @@ fun DateSelect(
             )
 
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_checkbox),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_checkbox
+                ),
                 contentDescription = null
             )
 
@@ -56,7 +55,6 @@ fun DateSelect(
                 modifier = Modifier
                     .padding(start = 12.dp)
             )
-
         }
         Spacer(modifier = Modifier.height(24.dp))
         Row(
@@ -65,36 +63,49 @@ fun DateSelect(
             horizontalArrangement = Arrangement.spacedBy(13.dp, Alignment.CenterHorizontally)
         ) {
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_sunday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_sunday
+                ),
                 contentDescription = null
             )
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_monday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_monday
+                ),
                 contentDescription = null
             )
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_tuesday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_tuesday
+                ),
                 contentDescription = null
             )
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_wendseday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_wendseday
+                ),
                 contentDescription = null
             )
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_thursday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_thursday
+                ),
                 contentDescription = null
             )
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_friday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_friday
+                ),
                 contentDescription = null
             )
             Image(
-                imageVector = ImageVector.vectorResource(id = org.sopt.alami.R.drawable.ic_date_saturday),
+                imageVector = ImageVector.vectorResource(
+                    id = org.sopt.alami.R.drawable.ic_date_saturday
+                ),
                 contentDescription = null
             )
         }
     }
-
 }
 
 @Preview(showBackground = true)

@@ -18,6 +18,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +28,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 import org.sopt.alami.presentation.morning.component.MorningSurface
@@ -35,15 +39,23 @@ import org.sopt.alami.presentation.morning.model.WeatherType
 
 @Composable
 fun MorningRoute(
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    viewModel: MorningViewModel = hiltViewModel()
 ) {
-    // TODO: 실제 데이터로 변경
+    LaunchedEffect(Unit) {
+        viewModel.fetchWeatherData()
+        viewModel.fetchSentenceData()
+    }
+
+    val weatherState by viewModel.weatherState.collectAsStateWithLifecycle()
+    val sentenceState by viewModel.sentenceState.collectAsStateWithLifecycle()
+
     MorningScreen(
         paddingValues = paddingValues,
-        temperature = 20,
-        currentDate = "4월 28일 월요일",
-        weatherType = WeatherType.SUNNY,
-        imageUrl = "https://github.com/user-attachments/assets/ce024f9f-39e8-48fa-8d78-4c345bcf40da"
+        temperature = weatherState.temperature,
+        currentDate = weatherState.currentDate,
+        weatherType = weatherState.weatherType,
+        imageUrl = sentenceState.imageUrl
     )
 }
 
@@ -53,7 +65,7 @@ fun MorningScreen(
     temperature: Int,
     currentDate: String,
     weatherType: WeatherType,
-    imageUrl: String,
+    imageUrl: Int,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()

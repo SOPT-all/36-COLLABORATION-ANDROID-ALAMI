@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import org.sopt.alami.presentation.alarm.navigation.Alarm
 import org.sopt.alami.presentation.alarm.navigation.navigateToAlarm
+import org.sopt.alami.presentation.alarmdismiss.navigation.navigateToAlarmDismiss
 import org.sopt.alami.presentation.morning.navigation.navigateToMorning
 import org.sopt.alami.presentation.report.navigation.navigateToReport
 import org.sopt.alami.presentation.setting.navigation.navigateToSetting
@@ -53,6 +54,10 @@ class MainNavigator(
 
     fun navigateUp() {
         navController::navigateUp
+    }
+
+    fun navigateToAlarmDismiss() {
+        navController.navigateToAlarmDismiss()
     }
 
     @Composable
