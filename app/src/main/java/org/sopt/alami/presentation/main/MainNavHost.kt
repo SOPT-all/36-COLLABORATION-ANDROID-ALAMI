@@ -22,7 +22,10 @@ fun MainNavHost(
         modifier = modifier
 
     ) {
-        alarmNavGraph(padding)
+        alarmNavGraph(
+            padding =padding,
+            navigateToAlarmDismiss = navigator::navigateToAlarmDismiss
+        )
         sleepNavGraph(padding)
         morningNavGraph(padding)
         reportNavGraph(padding)

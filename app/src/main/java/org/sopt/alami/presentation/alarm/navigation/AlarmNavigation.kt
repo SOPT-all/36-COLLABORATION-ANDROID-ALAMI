@@ -1,5 +1,6 @@
 package org.sopt.alami.presentation.alarm.navigation
 
+import android.R.attr.padding
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -14,9 +15,12 @@ fun NavController.navigateToAlarm(navOptions: NavOptions ? = null) {
 }
 
 fun NavGraphBuilder.alarmNavGraph(
-    padding: PaddingValues
+    padding: PaddingValues,
+    navigateToAlarmDismiss:() -> Unit
 ) {
-    composable<Alarm> { AlarmRoute(padding) }
+    composable<Alarm> { AlarmRoute(
+        paddingValues = padding,
+        navigateToAlarmDismiss = navigateToAlarmDismiss) }
 }
 
 @Serializable

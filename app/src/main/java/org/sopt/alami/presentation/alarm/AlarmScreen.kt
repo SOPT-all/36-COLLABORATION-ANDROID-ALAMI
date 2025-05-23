@@ -30,6 +30,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import org.sopt.alami.R
@@ -46,32 +49,24 @@ import org.sopt.alami.presentation.alarm.model.getTimeUntilAlarm
 import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
 
 @Composable
-fun AlarmRoute(paddingValues: PaddingValues) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues)
-    )
-    AlarmScreen(paddingValues, onClick = {})
-
-    AddAlarmButton(onClicked = {})
-}
-
-@Composable
-fun AlarmScreen(
+fun AlarmRoute(
     paddingValues: PaddingValues,
-    onClick: () -> Unit,
+    navigateToAlarmDismiss:() -> Unit,
     viewModel: AlarmViewModel = hiltViewModel()
 ) {
-    val alarmState = AlarmCardState(
-        selectedDays = persistentListOf(DayType.SATURDAY, DayType.WEDNESDAY),
-        meridiem = MeridiemType.PM,
-        alarmTime = AlarmTime(hour = "12", minute = "15")
-    )
 
     val alarmList = viewModel.alarmList
 
-    val shouldTrigger by viewModel.shouldTrigger.collectAsState()
+    val shouldTrigger by viewModel.shouldTrigger.collectAsStateWithLifecycle()
+
+
+
+    LaunchedEffect(shouldTrigger) {
+        if (shouldTrigger) {
+            navigateToAlarmDismiss()
+
+        }
+    }
 
     LaunchedEffect(Unit) {
         while (true) {
@@ -80,16 +75,35 @@ fun AlarmScreen(
         }
     }
 
-    LaunchedEffect(shouldTrigger) {
-        if (shouldTrigger) {
-            /*Todo navigate 연결*/
-        }
-    }
+    AlarmScreen(
+        paddingValues,
+        alarmList = alarmList,
+        onToggleAlarm = viewModel::setAlarmEnabled,
+        onClick = {})
+
+    AddAlarmButton(onClicked = {})
+}
+
+@Composable
+fun AlarmScreen(
+    paddingValues: PaddingValues,
+    alarmList: List<AlarmCardState>,
+    onToggleAlarm: (index: Int, isEnabled: Boolean) -> Unit,
+    onClick: () -> Unit
+
+) {
+    val alarmState = AlarmCardState(
+        selectedDays = persistentListOf(DayType.SATURDAY, DayType.WEDNESDAY),
+        meridiem = MeridiemType.PM,
+        alarmTime = AlarmTime(hour = "12", minute = "15")
+    )
+
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(paddingValues)
+            .padding(horizontal = 16.dp)
     ) {
         item {
             Row {
@@ -127,7 +141,7 @@ fun AlarmScreen(
                     alarmTime = alarmState.alarmTime,
                     isAlarmEnabled = alarmState.isAlarmEnabled,
                     onToggleAlarm = { isEnabled ->
-                        viewModel.setAlarmEnabled(index, isEnabled)
+                        onToggleAlarm(index, isEnabled)
                     }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -233,13 +247,13 @@ private fun SleepServiceOn() {
     }
 }
 
-@Preview
-@Composable
-private fun AlarmScreenPreview() {
-    AlamiTheme {
-        AlarmScreen(
-            paddingValues = PaddingValues(0.dp),
-            onClick = {}
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun AlarmScreenPreview() {
+//    AlamiTheme {
+//        AlarmScreen(
+//            paddingValues = PaddingValues(0.dp),
+//            onClick = {}
+//        )
+//    }
+//}
