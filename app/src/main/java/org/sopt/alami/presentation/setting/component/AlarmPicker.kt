@@ -17,48 +17,50 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import kotlinx.coroutines.flow.MutableStateFlow
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
-import org.sopt.alami.presentation.setting.model.AlarmSettingViewModel
 
 @Composable
-fun AlarmPicker(viewModel: AlarmSettingViewModel) {
+fun AlarmPicker(
+    initialHour: Int,
+    initialMinute: Int,
+    initialIsAm: Boolean,
+    onTimeChange: (Int, Int, Boolean) -> Unit,
+) {
+    var hour by rememberSaveable { mutableStateOf(initialHour) }
+    var minute by rememberSaveable { mutableStateOf(initialMinute) }
+    var isAm by rememberSaveable { mutableStateOf(initialIsAm) }
+
     val ampm = listOf("오전", "오후")
     val hours = (1..12).toList()
     val minutes = (0..59).toList()
 
-    val selectedAmpmIndex = remember { MutableStateFlow(0) }
-    val selectedHourIndex = remember { MutableStateFlow(0) }
-    val selectedMinuteIndex = remember { MutableStateFlow(0) }
+    LaunchedEffect(hour, minute, isAm) {
+        onTimeChange(hour, minute, isAm)
+    }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(240.dp)
-    ) {
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .height(240.dp)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(240.dp)
-                .background(AlarmiTheme.colors.grey800),
+                .height(240.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            PickerColumn(items = ampm, onValueChange = { selectedAmpmIndex.value = it })
-            PickerColumn(
-                items = hours.map { it.toString() },
-                onValueChange = { selectedHourIndex.value = it })
-            Spacer(modifier = Modifier.width(40.dp))
-            PickerColumn(
-                items = minutes.map { it.toString().padStart(2, '0') },
-                onValueChange = { selectedMinuteIndex.value = it })
+            PickerColumn(ampm, if (isAm) 0 else 1) { isAm = it == 0 }
+            PickerColumn(hours.map { it.toString() }, hour - 1) { hour = it + 1 }
+            Spacer(Modifier.width(40.dp))
+            PickerColumn(minutes.map { it.toString().padStart(2, '0') }, minute) { minute = it }
         }
 
         Box(
@@ -72,30 +74,19 @@ fun AlarmPicker(viewModel: AlarmSettingViewModel) {
                 .background(AlarmiTheme.colors.grey600.copy(alpha = 0.3f))
         )
     }
-    LaunchedEffect(selectedAmpmIndex, selectedHourIndex, selectedMinuteIndex) {
-        snapshotFlow {
-            Triple(
-                selectedAmpmIndex.value,
-                selectedHourIndex.value,
-                selectedMinuteIndex.value
-            )
-        }
-            .collect { (ampm, hour, minute) ->
-                viewModel.setAlarmTime(hour + 1, minute, ampm == 0)
-            }
-    }
 }
+
 
 @Composable
 fun PickerColumn(
     items: List<String>,
+    selectedIndex: Int,
     onValueChange: (Int) -> Unit,
 ) {
-    val listState = rememberLazyListState()
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = selectedIndex + 2)
+
     val itemHeight = 48.dp
     val itemHeightPx = with(LocalDensity.current) { itemHeight.toPx() }
-
-    // 컨테이너의 중앙점 계산 (240dp 높이의 절반)
     val containerCenterY = with(LocalDensity.current) { 120.dp.toPx() }
 
     LazyColumn(
@@ -110,7 +101,6 @@ fun PickerColumn(
             val layoutInfo = listState.layoutInfo.visibleItemsInfo.find { it.index == index }
             val itemCenter = layoutInfo?.let { it.offset + it.size / 2f }
 
-            // 더 정확한 중앙 감지 로직
             val isSelected = item.isNotBlank() &&
                     itemCenter != null &&
                     kotlin.math.abs(itemCenter - containerCenterY) < itemHeightPx / 2f
@@ -130,26 +120,11 @@ fun PickerColumn(
                 else
                     AlarmiTheme.colors.grey400,
                 modifier = Modifier
-                    .zIndex(if (isSelected) 5f else 2f) // 선택된 텍스트를 가장 위로
+                    .zIndex(if (isSelected) 5f else 2f)
                     .height(itemHeight)
                     .padding(vertical = 4.dp)
             )
         }
     }
-
-    // 스크롤 위치에 따라 자동으로 중앙에 스냅하는 효과
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.firstVisibleItemScrollOffset }
-            .collect { offset ->
-                val firstVisibleIndex = listState.firstVisibleItemIndex
-                val itemOffset = offset.toFloat()
-
-                // 가장 가까운 아이템으로 스냅
-                if (itemOffset > itemHeightPx / 2f && firstVisibleIndex < items.size + 1) {
-                    listState.animateScrollToItem(firstVisibleIndex + 1)
-                } else if (itemOffset < -itemHeightPx / 2f && firstVisibleIndex > 2) {
-                    listState.animateScrollToItem(firstVisibleIndex - 1)
-                }
-            }
-    }
 }
+
