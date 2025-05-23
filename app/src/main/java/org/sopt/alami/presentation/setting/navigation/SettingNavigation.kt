@@ -14,10 +14,11 @@ fun NavController.navigateToSetting(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.settingNavGraph(
-    padding: PaddingValues
+    padding: PaddingValues,
+    navController: NavController,
 ) {
     composable<Setting> {
-        SettingRoute(padding)
+        SettingRoute(paddingValues = padding, navController = navController)
     }
 }
 

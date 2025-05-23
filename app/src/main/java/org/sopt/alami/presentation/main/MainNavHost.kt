@@ -26,6 +26,6 @@ fun MainNavHost(
         sleepNavGraph(padding)
         morningNavGraph(padding)
         reportNavGraph(padding)
-        settingNavGraph(padding)
+        settingNavGraph(padding, navController = navigator.navController)
     }
 }
