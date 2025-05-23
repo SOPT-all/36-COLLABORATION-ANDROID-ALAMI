@@ -3,7 +3,6 @@ package org.sopt.alami.presentation.alarm
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,34 +17,23 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.delay
 import org.sopt.alami.R
-import org.sopt.alami.core.designsystem.theme.AlamiTheme
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 import org.sopt.alami.presentation.alarm.component.AddAlarmButton
 import org.sopt.alami.presentation.alarm.component.AlarmCard
 import org.sopt.alami.presentation.alarm.component.AlarmSurface
 import org.sopt.alami.presentation.alarm.model.AlarmCardState
-import org.sopt.alami.presentation.alarm.model.AlarmTime
-import org.sopt.alami.presentation.alarm.model.DayType
-import org.sopt.alami.presentation.alarm.model.MeridiemType
-import org.sopt.alami.presentation.alarm.model.getTimeUntilAlarm
 import org.sopt.alami.presentation.alarm.viewmodel.AlarmViewModel
 
 @Composable
@@ -58,6 +46,8 @@ fun AlarmRoute(
     val alarmList = viewModel.alarmList
 
     val shouldTrigger by viewModel.shouldTrigger.collectAsStateWithLifecycle()
+
+    val nextAlarmTime by viewModel.nextAlarmTime.collectAsStateWithLifecycle()
 
 
 
@@ -76,10 +66,12 @@ fun AlarmRoute(
     }
 
     AlarmScreen(
-        paddingValues,
+        paddingValues = paddingValues,
         alarmList = alarmList,
+        nextAlarmTime = nextAlarmTime,
         onToggleAlarm = viewModel::setAlarmEnabled,
-        onClick = {})
+        onClick = {}
+    )
 
     AddAlarmButton(onClicked = {})
 }
@@ -88,16 +80,11 @@ fun AlarmRoute(
 fun AlarmScreen(
     paddingValues: PaddingValues,
     alarmList: List<AlarmCardState>,
+    nextAlarmTime: String,
     onToggleAlarm: (index: Int, isEnabled: Boolean) -> Unit,
     onClick: () -> Unit
 
 ) {
-    val alarmState = AlarmCardState(
-        selectedDays = persistentListOf(DayType.SATURDAY, DayType.WEDNESDAY),
-        meridiem = MeridiemType.PM,
-        alarmTime = AlarmTime(hour = "12", minute = "15")
-    )
-
 
     LazyColumn(
         modifier = Modifier
@@ -121,7 +108,7 @@ fun AlarmScreen(
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            NextAlarmInfo(alarmTime = alarmState.alarmTime)
+            NextAlarmInfo(alarmTime = nextAlarmTime)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -179,13 +166,10 @@ private fun NextAlarmButton(modifier: Modifier) {
 }
 
 @Composable
-private fun NextAlarmInfo(alarmTime: AlarmTime) {
-    val nextAlarmTime = remember(alarmTime) {
-        getTimeUntilAlarm(alarmTime)
-    }
-    Text(
+private fun NextAlarmInfo(alarmTime: String) {
 
-        text = nextAlarmTime,
+    Text(
+        text = alarmTime,
         style = AlarmiTheme.typography.title03b22,
         color = AlarmiTheme.colors.grey100
 
@@ -247,13 +231,3 @@ private fun SleepServiceOn() {
     }
 }
 
-//@Preview
-//@Composable
-//private fun AlarmScreenPreview() {
-//    AlamiTheme {
-//        AlarmScreen(
-//            paddingValues = PaddingValues(0.dp),
-//            onClick = {}
-//        )
-//    }
-//}

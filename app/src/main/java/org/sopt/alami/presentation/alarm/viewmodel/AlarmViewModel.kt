@@ -13,7 +13,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.alami.data.repository.AlarmListRepository
 import org.sopt.alami.presentation.alarm.model.AlarmCardState
+import org.sopt.alami.presentation.alarm.model.getTimeUntilAlarm
 import org.sopt.alami.presentation.alarm.model.toAlarmCardState
+import org.sopt.alami.presentation.alarm.model.toNextAlarmTime
 import timber.log.Timber
 
 @HiltViewModel
@@ -31,6 +33,10 @@ class AlarmViewModel @Inject constructor(
     val shouldTrigger: StateFlow<Boolean>
         get() = _shouldTrigger.asStateFlow()
 
+    private val _nextAlarmTime = MutableStateFlow("")
+    val nextAlarmTime: StateFlow<String>
+        get() = _nextAlarmTime.asStateFlow()
+
     init {
         fetchAlarm(userId = 1)
     }
@@ -40,6 +46,17 @@ class AlarmViewModel @Inject constructor(
             repository.getAlarmList(userId)
                 .onSuccess {
                     alarmList = it.map { dto -> dto.toAlarmCardState() }
+
+                    val nextAlarm = alarmList
+                        .filter { it.isAlarmEnabled }
+                        .minByOrNull { it.alarmTime.toNextAlarmTime() }
+                        ?.alarmTime
+
+                    if (nextAlarm != null) {
+                        _nextAlarmTime.value = getTimeUntilAlarm(nextAlarm)
+                    } else {
+                        "예정된 알람이 없어요!"
+                    }
                 }
                 .onFailure {
                     Timber.e("알람 목록 불러오기 실패 : ${it.message}")
