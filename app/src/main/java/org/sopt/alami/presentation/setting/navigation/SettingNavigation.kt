@@ -15,10 +15,13 @@ fun NavController.navigateToSetting(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.settingNavGraph(
     padding: PaddingValues,
-    navController: NavController,
+    navigateToAlarm: () -> Unit,
 ) {
     composable<Setting> {
-        SettingRoute(paddingValues = padding, navController = navController)
+        SettingRoute(
+            paddingValues = padding,
+            onNavigateToAlarm = navigateToAlarm
+        )
     }
 }
 
