@@ -4,10 +4,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
-import org.sopt.alami.data.service.MorningService
+import org.sopt.alami.data.repository.AlarmRepository
+import org.sopt.alami.data.service.AddAlarmService
 import org.sopt.alami.data.service.AlarmListService
+import org.sopt.alami.data.service.MorningService
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -22,4 +24,9 @@ object ServiceModule {
     @Singleton
     fun provideMorningService(retrofit: Retrofit): MorningService =
         retrofit.create(MorningService::class.java)
+
+    @Provides
+    fun provideAlarmRepository(
+        addAlarmService: AddAlarmService
+    ): AlarmRepository = AlarmRepository(addAlarmService)
 }

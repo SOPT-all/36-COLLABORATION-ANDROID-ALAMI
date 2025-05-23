@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import org.sopt.alami.BuildConfig.BASE_URL
+import org.sopt.alami.data.service.AddAlarmService
 import retrofit2.Converter
 import retrofit2.Retrofit
 import timber.log.Timber
@@ -93,4 +94,11 @@ object RetrofitModule {
             .client(client)
             .addConverterFactory(factory)
             .build()
+
+    @Provides
+    @Singleton
+    fun provideAddAlarmService(retrofit: Retrofit): AddAlarmService {
+        return retrofit.create(AddAlarmService::class.java)
+    }
+
 }

@@ -69,7 +69,10 @@ fun AlarmRoute(
         onClick = {}
     )
 
-    AddAlarmButton(onClicked = {})
+    AddAlarmButton(
+        paddingValues = paddingValues,
+        onClicked = {}
+    )
 }
 
 @Composable
