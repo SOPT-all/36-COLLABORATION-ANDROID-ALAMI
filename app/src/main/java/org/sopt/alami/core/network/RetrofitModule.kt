@@ -97,7 +97,8 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideAddAlarmService(retrofit: Retrofit): AddAlarmService =
-        retrofit.create(AddAlarmService::class.java)
+    fun provideAddAlarmService(retrofit: Retrofit): AddAlarmService {
+        return retrofit.create(AddAlarmService::class.java)
+    }
 
 }
