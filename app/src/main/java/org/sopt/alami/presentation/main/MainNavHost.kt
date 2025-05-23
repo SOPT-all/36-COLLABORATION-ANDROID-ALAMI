@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
 import org.sopt.alami.presentation.alarm.navigation.Alarm
 import org.sopt.alami.presentation.alarm.navigation.alarmNavGraph
+import org.sopt.alami.presentation.alarmdismiss.navigation.alarmDismissNavGraph
 import org.sopt.alami.presentation.morning.navigation.morningNavGraph
 import org.sopt.alami.presentation.report.navigation.reportNavGraph
 import org.sopt.alami.presentation.setting.navigation.Setting
@@ -30,6 +31,7 @@ fun MainNavHost(
             padding = padding,
             navigateToAlarmDismiss = navigator::navigateToAlarmDismiss
         )
+        alarmDismissNavGraph(padding = padding)
         sleepNavGraph(padding)
         morningNavGraph(padding)
         reportNavGraph(padding)

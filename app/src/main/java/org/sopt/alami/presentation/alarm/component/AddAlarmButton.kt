@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +31,10 @@ import org.sopt.alami.R
 import org.sopt.alami.core.designsystem.theme.AlarmiTheme
 
 @Composable
-fun AddAlarmButton(onClicked: () -> Unit) {
+fun AddAlarmButton(
+    paddingValues: PaddingValues,
+    onClicked: () -> Unit
+) {
     var isExpanded by remember { mutableStateOf(false) }
 
     if (isExpanded) {
@@ -47,7 +51,8 @@ fun AddAlarmButton(onClicked: () -> Unit) {
         Column(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(bottom = 96.dp, end = 16.dp),
+                .padding(paddingValues)
+                .padding(bottom = 16.dp, end = 16.dp),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.End
 

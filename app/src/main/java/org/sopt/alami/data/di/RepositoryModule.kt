@@ -1,4 +1,4 @@
-package org.sopt.alami.core.di
+package org.sopt.alami.data.di
 
 object RepositoryModule {
 

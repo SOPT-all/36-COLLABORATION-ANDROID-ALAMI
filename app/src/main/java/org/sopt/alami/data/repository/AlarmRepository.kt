@@ -16,7 +16,7 @@ class AlarmRepository @Inject constructor(
             if (response.success && response.data != null) {
                 response.data
             } else {
-                throw Exception(response.error?.message ?: "응답 오류 혹은 데이터 없음")
+                throw Exception()
             }
         }
     }
