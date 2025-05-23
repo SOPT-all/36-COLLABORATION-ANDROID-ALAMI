@@ -93,17 +93,9 @@ fun SettingScreen(
         }
         item {
             DateSelect()
-        }
-        item {
             ScreenDivider()
-        }
-        item {
             AddMission()
-        }
-        item {
             ScreenDivider()
-        }
-        item {
             SoundProgress(currentPosition = 1f, onSeek = {})
         }
         items(settingItems.size) { index ->
